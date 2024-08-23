@@ -13,7 +13,7 @@ Activates the quest and completes it within the required minutes, normally 15<br
 # Play Quest
 ⚠️ Closing or Opening Discord may stop it automatically ⚠️
 ```js
-const authorization=""; // Your Discord Token
+const authorization="EnterHere"; // Your Discord Token
 
 const questId="1270822177289142464"; // Quest Id
 
@@ -29,7 +29,7 @@ fetch(`https://${domain}/api/v9/quests/${questId}/heartbeat`,{
 # Stream Quest
 ⚠️ Join a Voice channel with another person (can be a discord bot) and Stream your screen then use the code ⚠️
 ```js
-const authorization=""; // Your Discord Token
+const authorization="EnterHere"; // Your Discord Token
 
 const guildId="EnterHere" // Server Id
 const channelId="EnterHere" // Channel Id
