@@ -31,8 +31,8 @@ fetch(`https://${domain}/api/v9/quests/${questId}/heartbeat`,{
 ```js
 const authorization="EnterHere"; // Your Discord Token
 
-const guildId="EnterHere" // Server Id
-const channelId="EnterHere" // Channel Id
+const guildId="EnterHere" // Server Id (The Server you're streaming in)
+const channelId="EnterHere" // Voice Stream Channel Id (The Channel you're streaming in)
 const userId="EnterHere" // Your User Id
 
 const questId="1271118866113892352"; // Quest Id
