@@ -1,8 +1,8 @@
 # Discord-Quester
 
 
-Activates the quest and completes it within the required minutes
-Some quests may require you to screen share with a friend/
+Activates the quest and completes it within the required minutes, normally 15<br>
+⚠️ Some quests may require you to screen share with a friend ⚠️
 #
 ```js
 const authorization=""; // Your Discord Token
