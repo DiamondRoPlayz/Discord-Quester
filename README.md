@@ -29,7 +29,10 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
   let getQuests=()=>[...QuestsStore.quests.values()]
   .filter(a=>qOrd.some(k=>Object.keys(a.config.taskConfig.tasks)[0].includes(k)))
   .filter(f=>f.userStatus?.enrolledAt&&!f?.userStatus?.completedAt&&new Date(f.config.expiresAt)>new Date())
-  .sort((a,b)=>qOrd.findIndex(k=>Object.keys(a.config.taskConfig.tasks)[0].includes(k))-qOrd.findIndex(k=>Object.keys(b.config.taskConfig.tasks)[0].includes(k)));
+  .sort((a,b)=>{
+    const[tA,tB]=[a,b].map(o=>Object.values(o.config.taskConfig.tasks)[0]);
+    return qOrd.findIndex(k=>tA.eventName.includes(k))-qOrd.findIndex(k=>tB.eventName.includes(k))||tA.target-tB.target;
+  });
   if(getQuests().length<1)return console.log('No quests to complete.');
   let questBeat=(questId,stream_key)=>api.post({url:`/quests/${questId}/heartbeat`,body:{stream_key,terminal:false}});
   let questVideo=(questId,timestamp)=>api.post({url:`/quests/${questId}/video-progress`,body:{timestamp}});
