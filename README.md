@@ -12,9 +12,9 @@
 #
 <p align="center">
 Automatically completes your enrolled quests
+<br>
 PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/..., STREAM_ON_DESKTOP, PLAY_ACTIVITY, WATCH_VIDEO
 
-New: All Plays like PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY and WATCH_VIDEO
 <br>
 ⚠️ Some quests require you to Stream your screen with another person ⚠️
 </p>
