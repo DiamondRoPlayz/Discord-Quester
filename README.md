@@ -13,7 +13,7 @@
 <p align="center">
 Automatically completes your enrolled quests
 <br>
-PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/..., STREAM_ON_DESKTOP, PLAY_ACTIVITY, WATCH_VIDEO
+PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DESKTOP/..., WATCH_VIDEO/...
 
 <br>
 ⚠️ Some quests require you to Stream your screen with another person ⚠️
@@ -45,11 +45,11 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/..., STREAM_ON_DESKTOP, PLAY_AC
     let quest=getQuests()[0];
     let tasks=quest.config.taskConfig.tasks;
     let task=Object.keys(tasks)[0];
-    console.log(task,'Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value}/${tasks?.[task]?.target}`);
+    console.log(task,'Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value||0}/${tasks?.[task]?.target}`);
     if(task.includes('PLAY')){
       await playQuest(quest.id);await sleep(3e4);
     }else if(task.includes('WATCH')){
-      await playVideo(quest.id,quest?.userStatus?.progress?.[task]?.value+11);await sleep(1e4);
+      await playVideo(quest.id,(quest?.userStatus?.progress?.[task]?.value||0)+11);await sleep(1e4);
     }else if(task.includes('STREAM')){
       let stream=getCurrentUserActiveStream();
       if(stream){
