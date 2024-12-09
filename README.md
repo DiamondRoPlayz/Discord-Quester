@@ -25,9 +25,11 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/..., STREAM_ON_DESKTOP, PLAY_AC
   let rc;webpackChunkdiscord_app.push([[Symbol()],{},r=>rc=r.c]);
   let api=Object.values(rc).find(x=>x?.exports?.tn?.post).exports.tn;
   let QuestsStore=Object.values(rc).find(x=>x?.exports?.Z?.getQuest).exports.Z;
+  let qOrd=['WATCH','PLAY','STREAM'];
   let getQuests=()=>[...QuestsStore.quests.values()]
+  .filter(a=>qOrd.some(k=>Object.keys(a.config.taskConfig.tasks)[0].includes(k)))
   .filter(f=>f.userStatus?.enrolledAt&&!f?.userStatus?.completedAt&&new Date(f.config.expiresAt)>new Date())
-  .sort(a=>a.config.taskConfig.tasks.PLAY_ON_DESKTOP&&-1||1);
+  .sort((a,b)=>qOrd.findIndex(k=>Object.keys(a.config.taskConfig.tasks)[0].includes(k))-qOrd.findIndex(k=>Object.keys(b.config.taskConfig.tasks)[0].includes(k)));
   if(getQuests().length<1)return console.log('No quests to complete.');
   let questBeat=(questId,stream_key)=>api.post({url:`/quests/${questId}/heartbeat`,body:{stream_key,terminal:false}});
   let questVideo=(questId,timestamp)=>api.post({url:`/quests/${questId}/video-progress`,body:{timestamp}});
@@ -45,13 +47,10 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/..., STREAM_ON_DESKTOP, PLAY_AC
     let task=Object.keys(tasks)[0];
     console.log(task,'Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value}/${tasks?.[task]?.target}`);
     if(task.includes('PLAY')){
-      //console.log('Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value}/${tasks?.[task]?.target}`)
       await playQuest(quest.id);await sleep(3e4);
-    }else if(tasks.WATCH_VIDEO){
-      //console.log('Quest Progress:',`${quest?.userStatus?.progress?.WATCH_VIDEO?.value}/${tasks?.WATCH_VIDEO?.target}`);
-      await playVideo(quest.id,quest?.userStatus?.progress?.WATCH_VIDEO?.value+4);await sleep(3e4);
-    }else if(tasks.STREAM_ON_DESKTOP){
-      //console.log('Quest Progress:',`${quest?.userStatus?.progress?.STREAM_ON_DESKTOP?.value}/${tasks?.STREAM_ON_DESKTOP?.target}`);
+    }else if(task.includes('WATCH')){
+      await playVideo(quest.id,quest?.userStatus?.progress?.[task]?.value+11);await sleep(1e4);
+    }else if(task.includes('STREAM')){
       let stream=getCurrentUserActiveStream();
       if(stream){
         let voiceStates=getVoiceStatesForChannel(stream.channelId);
