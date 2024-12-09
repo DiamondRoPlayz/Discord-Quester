@@ -12,6 +12,9 @@
 #
 <p align="center">
 Automatically completes your enrolled quests
+PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/..., STREAM_ON_DESKTOP, PLAY_ACTIVITY, WATCH_VIDEO
+
+New: All Plays like PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY and WATCH_VIDEO
 <br>
 ⚠️ Some quests require you to Stream your screen with another person ⚠️
 </p>
@@ -27,8 +30,10 @@ Automatically completes your enrolled quests
   .sort(a=>a.config.taskConfig.tasks.PLAY_ON_DESKTOP&&-1||1);
   if(getQuests().length<1)return console.log('No quests to complete.');
   let questBeat=(questId,stream_key)=>api.post({url:`/quests/${questId}/heartbeat`,body:{stream_key,terminal:false}});
+  let questVideo=(questId,timestamp)=>api.post({url:`/quests/${questId}/video-progress`,body:{timestamp}});
   let playQuest=(questId)=>questBeat(questId,`call:${questId}:1`);
   let streamQuest=(questId,type,stream)=>questBeat(questId,`${type}:${stream.filter(v=>v).join(':')}`);
+  let playVideo=(questId,timestamp)=>questVideo(questId,timestamp);
   let findX=v=>Object.values(rc).find(x=>x?.exports?.Z?.[v]).exports.Z[v];
   let callX=v=>Object.values(rc).find(x=>x?.exports?.Z?.[v]).exports.Z[v]();
   let getCurrentUserActiveStream=()=>callX('getCurrentUserActiveStream');
@@ -37,11 +42,16 @@ Automatically completes your enrolled quests
   while(getQuests().length>0){
     let quest=getQuests()[0];
     let tasks=quest.config.taskConfig.tasks;
-    if(tasks.PLAY_ON_DESKTOP){
-      console.log('Quest Progress:',`${quest?.userStatus?.progress?.PLAY_ON_DESKTOP?.value}/${tasks?.PLAY_ON_DESKTOP?.target}`)
+    let task=Object.keys(tasks)[0];
+    console.log(task,'Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value}/${tasks?.[task]?.target}`);
+    if(task.includes('PLAY')){
+      //console.log('Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value}/${tasks?.[task]?.target}`)
       await playQuest(quest.id);await sleep(3e4);
+    }else if(tasks.WATCH_VIDEO){
+      //console.log('Quest Progress:',`${quest?.userStatus?.progress?.WATCH_VIDEO?.value}/${tasks?.WATCH_VIDEO?.target}`);
+      await playVideo(quest.id,quest?.userStatus?.progress?.WATCH_VIDEO?.value+4);await sleep(3e4);
     }else if(tasks.STREAM_ON_DESKTOP){
-      console.log('Quest Progress:',`${quest?.userStatus?.progress?.STREAM_ON_DESKTOP?.value}/${tasks?.STREAM_ON_DESKTOP?.target}`);
+      //console.log('Quest Progress:',`${quest?.userStatus?.progress?.STREAM_ON_DESKTOP?.value}/${tasks?.STREAM_ON_DESKTOP?.target}`);
       let stream=getCurrentUserActiveStream();
       if(stream){
         let voiceStates=getVoiceStatesForChannel(stream.channelId);
