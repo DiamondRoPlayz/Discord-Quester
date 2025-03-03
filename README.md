@@ -24,7 +24,7 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
   let ok=navigator.userAgent.includes('Electron/');if(!ok)return console.log('Change your User-agent to "Electron/" or use the app.');
   let rc;webpackChunkdiscord_app.push([[Symbol()],{},r=>rc=r.c]);
   let api=Object.values(rc).find(x=>x?.exports?.tn?.post).exports.tn;
-  let QuestsStore=Object.values(rc).find(x=>x?.exports?.Z?.getQuest).exports.Z;
+  let QuestsStore=Object.values(rc).find(x=>x?.exports?.Z?.__proto__?.getQuest).exports.Z;
   let qOrd=['WATCH','PLAY','STREAM'];
   let getQuests=()=>[...QuestsStore.quests.values()]
   .filter(a=>qOrd.some(k=>Object.keys(a.config.taskConfig.tasks)[0].includes(k)))
