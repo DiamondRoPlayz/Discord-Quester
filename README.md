@@ -30,11 +30,11 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
   let QuestsStore=Object.values(rc).find(x=>x?.exports?.Z?.__proto__?.getQuest).exports.Z;
   let qOrd=['WATCH','PLAY','STREAM'];
   let getQuests=()=>[...QuestsStore.quests.values()]
-  .filter(a=>qOrd.some(k=>Object.keys(a.config.taskConfig.tasks)[0].includes(k)))
+  .filter(a=>qOrd.some(k=>Object.keys(a.config.taskConfigV2.tasks)[0].includes(k)))
   .filter(f=>f.userStatus?.enrolledAt&&!f?.userStatus?.completedAt&&new Date(f.config.expiresAt)>new Date())
   .sort((a,b)=>{
-    const[tA,tB]=[a,b].map(o=>Object.values(o.config.taskConfig.tasks)[0]);
-    return qOrd.findIndex(k=>tA.eventName.includes(k))-qOrd.findIndex(k=>tB.eventName.includes(k))||tA.target-tB.target;
+    const[tA,tB]=[a,b].map(o=>Object.values(o.config.taskConfigV2.tasks)[0]);
+    return qOrd.findIndex(k=>tA.type.includes(k))-qOrd.findIndex(k=>tB.type.includes(k))||tA.target-tB.target;
   });
   if(getQuests().length<1)return console.log('No quests to complete.');
   let questBeat=(questId,stream_key)=>api.post({url:`/quests/${questId}/heartbeat`,body:{stream_key,terminal:false}});
@@ -49,7 +49,7 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   while(getQuests().length>0){
     let quest=getQuests()[0];
-    let tasks=quest.config.taskConfig.tasks;
+    let tasks=quest.config.taskConfigV2.tasks;
     let task=Object.keys(tasks)[0];
     console.log(task,'Quest Progress:',`${quest?.userStatus?.progress?.[task]?.value||0}/${tasks?.[task]?.target}`);
     if(task.includes('PLAY')){
