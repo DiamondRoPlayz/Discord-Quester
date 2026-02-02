@@ -42,8 +42,8 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
   let playQuest=(questId)=>questBeat(questId,`call:${questId}:1`);
   let streamQuest=(questId,type,stream)=>questBeat(questId,`${type}:${stream.filter(v=>v).join(':')}`);
   let playVideo=(questId,timestamp)=>questVideo(questId,timestamp);
-  let findX=v=>Object.values(rc).find(x=>x?.exports?.A?.__proto__?.[v]).exports.Z.__proto__[v];
-  let callX=v=>Object.values(rc).find(x=>x?.exports?.A?.__proto__?.[v]).exports.Z.__proto__[v]();
+  let findX=v=>Object.values(rc).find(x=>x?.exports?.A?.__proto__?.[v]).exports.A.__proto__[v];
+  let callX=v=>Object.values(rc).find(x=>x?.exports?.A?.__proto__?.[v]).exports.A.__proto__[v]();
   let getCurrentUserActiveStream=()=>callX('getCurrentUserActiveStream');
   let getVoiceStatesForChannel=findX('getVoiceStatesForChannel');
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
