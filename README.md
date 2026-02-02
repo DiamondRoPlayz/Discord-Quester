@@ -26,8 +26,8 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
 (async()=>{
   let ok=navigator.userAgent.includes('Electron/');if(!ok)return console.log('Change your User-agent to "Electron/" or use the app.');
   let rc;webpackChunkdiscord_app.push([[Symbol()],{},r=>r.b&&(rc=r.c)]);
-  let api=Object.values(rc).find(x=>x?.exports?.tn?.post).exports.tn;
-  let QuestsStore=Object.values(rc).find(x=>x?.exports?.Z?.__proto__?.getQuest).exports.Z;
+  let api=Object.values(rc).find(x=>x?.exports?.Bo?.post).exports.Bo;
+  let QuestsStore=Object.values(rc).find(x=>x?.exports?.A?.__proto__?.getQuest).exports.A;
   let qOrd=['WATCH','PLAY','STREAM'];
   let getQuests=()=>[...QuestsStore.quests.values()]
   .filter(a=>qOrd.some(k=>Object.keys(a.config.taskConfigV2.tasks)[0].includes(k)))
@@ -42,8 +42,8 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
   let playQuest=(questId)=>questBeat(questId,`call:${questId}:1`);
   let streamQuest=(questId,type,stream)=>questBeat(questId,`${type}:${stream.filter(v=>v).join(':')}`);
   let playVideo=(questId,timestamp)=>questVideo(questId,timestamp);
-  let findX=v=>Object.values(rc).find(x=>x?.exports?.Z?.[v]).exports.Z[v];
-  let callX=v=>Object.values(rc).find(x=>x?.exports?.Z?.[v]).exports.Z[v]();
+  let findX=v=>Object.values(rc).find(x=>x?.exports?.A?.__proto__?.[v]).exports.Z.__proto__[v];
+  let callX=v=>Object.values(rc).find(x=>x?.exports?.A?.__proto__?.[v]).exports.Z.__proto__[v]();
   let getCurrentUserActiveStream=()=>callX('getCurrentUserActiveStream');
   let getVoiceStatesForChannel=findX('getVoiceStatesForChannel');
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
