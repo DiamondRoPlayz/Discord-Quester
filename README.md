@@ -1,13 +1,10 @@
 <h1 align="center">Basic Discord Quester</h1>
 <p align="center">
   <a href="#">
-<!--     <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FDiamondRoPlayz%2FDiscord-Quester&title_bg=%232D2D2D&count_bg=%2300CC69&icon=github.svg&icon_color=%23E7E7E7&title=Views%20%28Day%20%2F%20All%29&edge_flat=false"/> -->
-<!--         Last views got taken down -->
-<!--         Views start as of April 2025 -->
-        <img src="https://badges.strrl.dev/visits/DiamondRoPlayz/Discord-Quester?style=flat&labelColor=333333&logoColor=E7E7E7&label=Visits&logo=github" />
+    <img src="https://diamondroplayz.zgit.workers.dev/visits/Discord-Quester"/>
   </a>
   <a href="#">
-    <img src="https://img.shields.io/github/stars/DiamondRoPlayz/Discord-Quester?style=flat&labelColor=333333&logoColor=E7E7E7&color=EEAA00&label=Stars&logo=github"/>
+    <img src="https://diamondroplayz.zgit.workers.dev/stars/Discord-Quester"/>
   </a>
 </p>
 
